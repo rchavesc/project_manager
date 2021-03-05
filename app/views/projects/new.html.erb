@@ -1,0 +1,35 @@
+<div class= 'container'>
+  <h1>New project!</h1>
+  <br>
+  <h2>Project Info</h2>
+  <br>
+
+  <% if @project.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@project.errors.count, "error") %> All fields required. Please complete the form:</h2>
+        <ul>
+          <% @project.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  <div class= 'container'>
+    <%= form_with model: @project do |form| %> <!-- importante el @project debe venir del controller -->
+      <%= form.text_field :name, class:'form-control', placeholder: 'Project Name' %>
+      <br>
+      <%= form.text_area :description, size: "60x10",class:'form-control', placeholder: 'Description of the project' %>
+      <br>
+      <p> Project start date</p>
+      <%= form.date_field :started_at, class:'form-control', placeholder: 'yyyy/mm/dd' %>
+      <br>
+      <p> Estimated project end date</p>
+      <%= form.date_field :ended_at, class:'form-control', placeholder: 'yyyy/mm/dd' %>
+      <br>
+      <%= form.select :status, [["Propose New Project", :proposal], ["In Progresss", :progress], ["Completed", :finished]],{}, class:'form-control' %>
+      <br>
+      <%= form.submit 'Submit', class: 'btn btn-outline-secondary btn-lg' %>
+    <% end %>
+  </div>
+ </div> 
